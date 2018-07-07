@@ -14,7 +14,7 @@ CSV Editor (I used excel)
 
 ### Installing
 
-Just place the script into the same folder as your CSV file and then replace 'YOUR.csv' in the script with your csv's file name.
+Just place the python script and the CSV file in the same folder and you're good to go.
 
 ## Authors
 
