@@ -1,6 +1,6 @@
 # Item Price Data scraper for Old School Runescape
 
-This script scrapes the official OSRS GE data and organizes it by date, item name, and price. It inserts all of this data into a CSV file of your choice.
+This script scrapes the official OSRS GE data and organizes it by date, item name, and price. It inserts all of this data into a CSV file of your choice. I created it so that you can collect useful data enabling you to analyse the market or specific items and make profit investing in them.
 
 ## Getting Started
 
@@ -15,6 +15,10 @@ CSV Editor (I used excel)
 ### Installing
 
 Just place the python script and the CSV file in the same folder and you're good to go.
+
+### Deployment
+
+This script will run through all of the items currently in the game (as of 07/07/2018 that is 21853) and can be lengthy to complete. If you want it to take less time you can alter the script to only run through a certain range of item ids by changing the 0 on line 9 and the 21853 on line 10 to whichever range you would prefer. The data is output with the current day so that you may run it every day and have the opportunity to then perform analysis on the data by date.
 
 ## Authors
 
