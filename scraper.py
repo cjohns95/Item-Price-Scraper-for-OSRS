@@ -44,5 +44,5 @@ while item <= 6:
 # create data frame with all items from records list
 df = pd.DataFrame(records, columns=['date', 'item', 'price'])
 # since price data is formatted as xxxK or xxxM when over 99,999 or 99,999,999 excel replace formatting should be utilized
-df.to_csv('YOUR.csv', index=False, encoding='utf-8')
+df.to_csv('GEData.csv', index=False, encoding='utf-8')
 print('done')
