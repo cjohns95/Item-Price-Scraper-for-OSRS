@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import time
+import random
 
 # create the progress bar function for use later during scraping
 def progbar(curr, total, full_progbar):
@@ -9,11 +10,24 @@ def progbar(curr, total, full_progbar):
     filled_progbar = round(frac*full_progbar)
     print('\r', '#'*filled_progbar + '-'*(full_progbar-filled_progbar), '[{:>7.2%}]'.format(frac), end='')
 
+
+# creates blank list for use later when creating the data frame, we also created the user-agent header here
+records = []
+
+# opens a text file of 1000 user-agents and organizes them into a list
+agentFile = open('agentList.txt', 'r')
+headersList = agentFile.readlines()
+
 # checks to see if we can even access the page
 page = ''
 while page == '':
+    # randomly chooses an agent from our list and puts it in the header variable to avoid triggering spam detection
+    randomAgent = headersList[random.randint(1,1000)]
+    randomAgent = (randomAgent[0:len(randomAgent)-2])
+    headers = {'user-agent': randomAgent}
+
     try:
-        page = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj=13190")
+        page = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj=13190", headers = headers)
         break
     except:
         print("Connection refused by server..")
@@ -21,16 +35,19 @@ while page == '':
         time.sleep(5)
         continue
 
-# creates blank list for use later when creating the data frame
-records = []
-
 # sets an item finds its value, recurses for every item
 item = 0
 while item <= 21853:
+    time.sleep(random.randint(0,3))
     item = str(item)
 
+    # randomly chooses an agent from our list and puts it in the header variable to avoid triggering spam detection
+    randomAgent = headersList[random.randint(1,1000)]
+    randomAgent = (randomAgent[0:len(randomAgent)-2])
+    headers = {'user-agent': randomAgent}
+
     # finds price by entering the ID into the URL and scraping from the corresponding page
-    r_price = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj="+item)
+    r_price = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj="+item, headers = headers)
     priceSoup = BeautifulSoup(r_price.text, 'html.parser')
 
     # checks for a specific statement to see if an item can even have a price value
@@ -38,7 +55,7 @@ while item <= 21853:
     if checkForItem[0].text != "Sorry, there was a problem with your request.":
 
         # this url will be used to find the item name by using its ID
-        r_name = requests.get("https://www.runelocus.com/item-details/?item_id="+item)
+        r_name = requests.get("https://www.runelocus.com/item-details/?item_id="+item, headers = headers)
         nameSoup = BeautifulSoup(r_name.text, 'html.parser')
         nameResults = nameSoup.find_all('h2')
         # modifies nameList results to only show the name
@@ -58,7 +75,7 @@ while item <= 21853:
             date = pd.datetime.now().date()
             date = str(date) # conversion to string needed to avoid list containing 'datetime.date(xxxx, x, x)' for date value
             records.append((date, name, price.strip())) # appends to record for use in creating pd data frame
-            #converts item to an int for progress bar then back into a str
+            # converts item to an int for progress bar then back into a str
             item = int(item)
             progbar(item, 21853, 20)
             item = str(item)
