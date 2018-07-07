@@ -18,7 +18,7 @@ Just place the python script and the CSV file in the same folder and you're good
 
 ### Deployment
 
-This script will run through all of the items currently in the game (as of 07/07/2018 that is 21853) and can be lengthy to complete. If you want it to take less time you can alter the script to only run through a certain range of item ids by changing the 0 on line 9 and the 21853 on line 10 to whichever range you would prefer. The data is output with the current day so that you may run it every day and have the opportunity to then perform analysis on the data by date.
+This script will run through all of the items currently in the game (as of 07/07/2018 that is 21853) and will take a max time 21.21hours give or take a few conseridering server connection speed. If you want it to take less time you can alter the script to only run through a certain range of item ids by changing the 0 on line 9 and the 21853 on line 10 to whichever range you would prefer. The data is output with the current day so that you may run it every day and have the opportunity to then perform analysis on the data by date.
 
 ## Authors
 
