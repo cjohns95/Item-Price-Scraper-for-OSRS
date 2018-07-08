@@ -11,23 +11,25 @@ def progbar(curr, total, full_progbar):
     print('\r', '#'*filled_progbar + '-'*(full_progbar-filled_progbar), '[{:>7.2%}]'.format(frac), end='')
 
 
+# randomly chooses an agent from a text file and returns it in the headers variable to avoid triggering spam detection
+def agent(txt):
+    agentFile = open(txt, 'r')
+    headersList = agentFile.readlines()
+    randomAgent = headersList[random.randint(1,1000)]
+    randomAgent = (randomAgent[0:len(randomAgent)-2])
+    headers = {'user-agent': randomAgent}
+    return headers
+
 # creates blank list for use later when creating the data frame, we also created the user-agent header here
 records = []
 
-# opens a text file of 1000 user-agents and organizes them into a list
-agentFile = open('agentList.txt', 'r')
-headersList = agentFile.readlines()
 
 # checks to see if we can even access the page
 page = ''
 while page == '':
-    # randomly chooses an agent from our list and puts it in the header variable to avoid triggering spam detection
-    randomAgent = headersList[random.randint(1,1000)]
-    randomAgent = (randomAgent[0:len(randomAgent)-2])
-    headers = {'user-agent': randomAgent}
 
     try:
-        page = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj=13190", headers = headers)
+        page = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj=13190", headers = agent('agentList.txt'))
         break
     except:
         print("Connection refused by server..")
@@ -41,13 +43,8 @@ while item <= 21853:
     time.sleep(random.randint(0,3))
     item = str(item)
 
-    # randomly chooses an agent from our list and puts it in the header variable to avoid triggering spam detection
-    randomAgent = headersList[random.randint(1,1000)]
-    randomAgent = (randomAgent[0:len(randomAgent)-2])
-    headers = {'user-agent': randomAgent}
-
     # finds price by entering the ID into the URL and scraping from the corresponding page
-    r_price = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj="+item, headers = headers)
+    r_price = requests.get("http://services.runescape.com/m=itemdb_oldschool/viewitem?obj="+item, headers = agent('agentList.txt'))
     priceSoup = BeautifulSoup(r_price.text, 'html.parser')
 
     # checks for a specific statement to see if an item can even have a price value
