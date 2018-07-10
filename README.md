@@ -14,7 +14,7 @@ CSV Editor (I used excel)
 
 ### Installing
 
-Just place the python script and the CSV file in the same folder and you're good to go.
+Just place the python script, CSV, and text files in the same folder and you're good to go. If it fails to run, make sure you have the required python modules installed.
 
 ### Deployment
 
