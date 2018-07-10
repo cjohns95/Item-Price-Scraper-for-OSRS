@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import time
 import random
 
-# create the progress bar function for use later during scraping (credit to github.com./marzukr)
+# create the progress bar function for use later during scraping (credit to github.com/marzukr)
 def progbar(curr, total, full_progbar):
     frac = curr/total
     filled_progbar = round(frac*full_progbar)
