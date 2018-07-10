@@ -30,4 +30,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* I did not create the progress bar function, I found it on [StackOverflow](https://stackoverflow.com/questions).
+* I used [marzukrs'](https://gist.github.com/marzukr/3ca9e0a1b5881597ce0bcb7fb0adc549) progress bar function.
