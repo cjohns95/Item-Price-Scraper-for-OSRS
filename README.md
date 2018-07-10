@@ -30,4 +30,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Thanks to [DataSchool](https://www.youtube.com/user/dataschool) for giving me a quick and easy guide on getting into web scraping and a light pandas intro.
+* I did not create the progress bar function, I found it on [StackOverflow](https://stackoverflow.com/questions).
